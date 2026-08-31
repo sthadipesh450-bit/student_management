@@ -45,6 +45,7 @@ PROJECT_APPS = [
     "user",
     "students",
     "attendance",
+    "dashboard",
 
 ]
 
@@ -124,7 +125,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# Use an absolute URL so static assets also load from nested pages such as
+# /dashboard/ (rather than resolving as /dashboard/static/...).
+STATIC_URL = '/static/'
+
+# Keep Django authentication redirects consistent with the project URLs.
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
 # Email

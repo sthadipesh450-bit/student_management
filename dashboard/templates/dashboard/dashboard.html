@@ -1,0 +1,50 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Management Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <h2>Student Management System</h2>
+        <div class="nav-links">
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'student_list' %}">Students</a>
+            <a href="{% url 'attendance_list' %}">Attendance</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-heading">
+            <h1>Dashboard</h1>
+            <p class="subtitle">Welcome to the Student Management System</p>
+        </header>
+
+        <section class="cards" aria-label="Dashboard statistics">
+            <article class="card">
+                <h3>Total Students</h3>
+                <div class="number">{{ total_students }}</div>
+            </article>
+            <article class="card">
+                <h3>Total Attendance Records</h3>
+                <div class="number">{{ total_attendance }}</div>
+            </article>
+        </section>
+
+        <section class="actions">
+            <h2>Quick Actions</h2>
+            <div class="action-list">
+                <a href="{% url 'student_list' %}" class="button">Manage Students</a>
+                <a href="{% url 'student_add' %}" class="button">Add Student</a>
+                <a href="{% url 'attendance_list' %}" class="button">Manage Attendance</a>
+                <a href="{% url 'attendance_add' %}" class="button">Add Attendance</a>
+            </div>
+        </section>
+
+        <footer class="footer">Student Management System</footer>
+    </main>
+</body>
+</html>

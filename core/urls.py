@@ -19,6 +19,11 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Provides /accounts/login/ and /accounts/logout/ for views protected by
+    # LoginRequiredMixin.
+    path('accounts/', include('user.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('students/', include('students.urls')),
-     path ('attendance/', include('attendance.urls')),
+    path('attendance/', include('attendance.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]
