@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Attendance Management</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'attendance/css/attendance.css' %}">
+</head>
+
+<body>
+<main class="attendance-container">
+
+    <h1>Attendance Management</h1>
+
+    <a class="button" href="{% url 'attendance_add' %}">
+        Add Attendance
+    </a>
+
+    {% if attendance %}
+
+    <div class="table-wrap">
+    <table>
+
+        <tr>
+            <th>Student</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Remarks</th>
+            <th>Action</th>
+        </tr>
+
+        {% for record in attendance %}
+
+        <tr>
+
+            <td>
+                {{ record.student.name }}
+            </td>
+
+            <td>
+                {{ record.date }}
+            </td>
+
+            <td>
+                {{ record.status }}
+            </td>
+
+            <td>
+                {{ record.remarks }}
+            </td>
+
+            <td>
+
+                <a class="action-link" href="{% url 'attendance_edit' record.pk %}">
+                    Edit
+                </a>
+
+                <span class="action-separator">|</span>
+
+                <a class="action-link delete" href="{% url 'attendance_delete' record.pk %}">
+                    Delete
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+    </div>
+
+    {% else %}
+
+        <p class="empty-state">No attendance records found.</p>
+
+    {% endif %}
+
+</main>
+</body>
+
+</html>

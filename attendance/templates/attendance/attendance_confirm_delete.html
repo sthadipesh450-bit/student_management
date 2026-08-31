@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Delete Attendance</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'attendance/css/attendance.css' %}">
+</head>
+
+<body>
+<main class="attendance-container">
+
+    <h1>Delete Attendance</h1>
+
+    <p class="confirmation-text">
+        Are you sure you want to delete this attendance record?
+    </p>
+
+    <form class="form-actions" method="POST">
+
+        {% csrf_token %}
+
+        <button class="button-danger" type="submit">
+            Yes, Delete
+        </button>
+
+    </form>
+
+    <a class="back-link" href="{% url 'attendance_list' %}">
+        Cancel
+    </a>
+
+</main>
+</body>
+
+</html>

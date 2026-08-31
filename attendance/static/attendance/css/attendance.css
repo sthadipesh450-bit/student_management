@@ -1,0 +1,87 @@
+:root {
+    --primary: #1e3a8a;
+    --primary-light: #2563eb;
+    --danger: #dc2626;
+    --surface: #ffffff;
+    --background: #f4f7fb;
+    --border: #dbe3ef;
+    --text: #1f2937;
+    --muted: #64748b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: var(--background);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+.attendance-container {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 32px;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+}
+
+h1 { margin: 0 0 24px; color: var(--primary); }
+
+.button, button {
+    display: inline-block;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--primary-light);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.button:hover, button:hover { background: var(--primary); }
+.button-danger { background: var(--danger); }
+.button-danger:hover { background: #b91c1c; }
+
+.table-wrap { overflow-x: auto; margin-top: 24px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 13px 12px; border: 1px solid var(--border); text-align: left; }
+th { background: var(--primary); color: #fff; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:hover { background: #eff6ff; }
+
+.action-link { color: var(--primary-light); font-weight: 700; text-decoration: none; }
+.action-link.delete { color: var(--danger); }
+.action-separator { margin: 0 8px; color: var(--muted); }
+
+.attendance-form { max-width: 600px; }
+.attendance-form p { margin: 0 0 18px; }
+.attendance-form label { display: block; margin-bottom: 7px; font-weight: 700; }
+.attendance-form input, .attendance-form select, .attendance-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font: inherit;
+}
+.attendance-form textarea { min-height: 100px; resize: vertical; }
+.attendance-form input:focus, .attendance-form select:focus, .attendance-form textarea:focus {
+    outline: 2px solid #93c5fd;
+    border-color: var(--primary-light);
+}
+
+.back-link { display: inline-block; margin-top: 22px; color: var(--primary-light); font-weight: 700; text-decoration: none; }
+.empty-state, .confirmation-text { color: var(--muted); font-size: 1.05rem; }
+.form-actions { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+
+@media (max-width: 600px) {
+    body { padding: 20px 12px; }
+    .attendance-container { padding: 22px 16px; }
+    th, td { padding: 10px; }
+}
