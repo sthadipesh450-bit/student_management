@@ -1,6 +1,8 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
 
@@ -14,3 +16,9 @@ class RegisterView(FormView):
         user = form.save()
         login(self.request, user)
         return redirect('dashboard')
+
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    """Show the signed-in user's account details."""
+
+    template_name = 'registration/profile.html'

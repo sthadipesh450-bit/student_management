@@ -13,7 +13,9 @@
         <div class="nav-links">
             <a href="{% url 'dashboard' %}">Dashboard</a>
             <a href="{% url 'student_list' %}">Students</a>
+            <a href="{% url 'teacher_list' %}">Teachers</a>
             <a href="{% url 'attendance_list' %}">Attendance</a>
+            <a href="{% url 'profile' %}">Profile</a>
         </div>
     </nav>
 
@@ -39,6 +41,8 @@
             <div class="action-list">
                 <a href="{% url 'student_list' %}" class="button">Manage Students</a>
                 <a href="{% url 'student_add' %}" class="button">Add Student</a>
+                <a href="{% url 'teacher_list' %}" class="button">Manage Teachers</a>
+                <a href="{% url 'teacher_add' %}" class="button">Add Teacher</a>
                 <a href="{% url 'attendance_list' %}" class="button">Manage Attendance</a>
                 <a href="{% url 'attendance_add' %}" class="button">Add Attendance</a>
             </div>

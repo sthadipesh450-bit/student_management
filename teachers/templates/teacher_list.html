@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+        }
+
+        .add-button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .add-button:hover {
+            background-color: #2980b9;
+        }
+
+        .table-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .name-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .edit {
+            color: #2980b9;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .delete {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                display: block;
+                padding: 20px;
+            }
+
+            .navbar h2 {
+                margin-bottom: 15px;
+            }
+
+            .navbar a {
+                margin-left: 0;
+                margin-right: 15px;
+            }
+
+            .header {
+                display: block;
+            }
+
+            .add-button {
+                display: inline-block;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <h2>Student Management System</h2>
+
+        <div>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'student_list' %}">Students</a>
+            <a href="{% url 'teacher_list' %}">Teachers</a>
+            <a href="{% url 'attendance_list' %}">Attendance</a>
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>Teacher Management</h1>
+
+            <a href="{% url 'teacher_add' %}" class="add-button">
+                + Add Teacher
+            </a>
+
+        </div>
+
+        <div class="table-box">
+
+            {% if teachers %}
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Teacher ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Subject</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for teacher in teachers %}
+
+                    <tr>
+
+                        <td>{{ teacher.teacher_id }}</td>
+
+                        <td>
+                            <a
+                                href="{% url 'teacher_detail' teacher.pk %}"
+                                class="name-link"
+                            >
+                                {{ teacher.first_name }}
+                                {{ teacher.last_name }}
+                            </a>
+                        </td>
+
+                        <td>{{ teacher.email }}</td>
+
+                        <td>{{ teacher.phone }}</td>
+
+                        <td>{{ teacher.subject }}</td>
+
+                        <td>
+                            <a
+                                href="{% url 'teacher_edit' teacher.pk %}"
+                                class="edit"
+                            >
+                                Edit
+                            </a>
+
+                            <a
+                                href="{% url 'teacher_delete' teacher.pk %}"
+                                class="delete"
+                            >
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+                <div class="empty">
+                    <h3>No Teachers Found</h3>
+                    <p>Click "Add Teacher" to add a teacher.</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>

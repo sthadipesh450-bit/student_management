@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Delete Teacher</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 550px;
+            margin: 80px auto;
+        }
+
+        .delete-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .delete-card h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .delete-card p {
+            margin-bottom: 30px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .cancel-button {
+            background-color: #777;
+            color: white;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .cancel-button:hover {
+            background-color: #555;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <h2>Student Management System</h2>
+
+        <div>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'teacher_list' %}">Teachers</a>
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <div class="delete-card">
+
+            <h1>Delete Teacher</h1>
+
+            <p>
+                Are you sure you want to delete
+                <strong>
+                    {{ object.first_name }}
+                    {{ object.last_name }}
+                </strong>?
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="delete-button"
+                >
+                    Yes, Delete
+                </button>
+
+                <a
+                    href="{% url 'teacher_list' %}"
+                    class="cancel-button"
+                >
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

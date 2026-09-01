@@ -46,6 +46,7 @@ PROJECT_APPS = [
     "students",
     "attendance",
     "dashboard",
+    "teachers",
 
 ]
 
