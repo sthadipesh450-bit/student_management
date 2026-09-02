@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Student Management System{% endblock %}</title>
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #68738a;
+        --primary: #3159d9;
+        --dark: #172554;
+        --surface: #fff;
+        --line: #e5e9f2;
+        --danger: #c9344c;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: var(--ink);
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #f4f7ff, #f9fbff 50%, #eef6ff);
+      }
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 17px max(5vw, 24px);
+        background: var(--dark);
+      }
+      .brand {
+        color: #fff;
+        font-size: 1.15rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .nav-links a {
+        padding: 8px 10px;
+        border-radius: 7px;
+        color: #dbeafe;
+        text-decoration: none;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #fff;
+        background: #ffffff22;
+      }
+      .container {
+        width: min(1120px, 90%);
+        margin: 44px auto;
+      }
+      .narrow {
+        width: min(720px, 90%);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2rem, 4vw, 2.7rem);
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .subtitle,
+      .lead {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .page-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+      .card,
+      .panel,
+      .content-card {
+        padding: 28px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 12px 30px #283b6e12;
+      }
+      .button,
+      button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 10px 16px;
+        border: 0;
+        border-radius: 8px;
+        color: #fff;
+        background: var(--primary);
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .secondary {
+        color: var(--ink);
+        background: #edf0f6;
+      }
+      .danger {
+        background: var(--danger);
+      }
+      .actions,
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+      .back,
+      .back-link {
+        display: inline-block;
+        margin-bottom: 18px;
+        color: var(--primary);
+        font-weight: 650;
+        text-decoration: none;
+      }
+      form p {
+        margin: 0 0 16px;
+      }
+      label {
+        display: block;
+        margin-bottom: 7px;
+        font-weight: 700;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px 11px;
+        border: 1px solid #cfd6e5;
+        border-radius: 8px;
+        color: var(--ink);
+        font: inherit;
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        padding: 14px;
+        color: var(--muted);
+        background: #f8faff;
+        font-size: 0.78rem;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      td {
+        padding: 14px;
+        border-top: 1px solid var(--line);
+      }
+      td a {
+        color: var(--primary);
+        font-weight: 650;
+        text-decoration: none;
+      }
+      .empty {
+        padding: 36px;
+        text-align: center;
+        color: var(--muted);
+      }
+      .details {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .details div {
+        padding: 14px;
+        border-radius: 9px;
+        background: #f8faff;
+      }
+      .details dd {
+        margin: 6px 0 0;
+      }
+      @media (max-width: 700px) {
+        .navbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .container,
+        .narrow {
+          width: calc(100% - 32px);
+          margin-top: 32px;
+        }
+        .page-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .details {
+          grid-template-columns: 1fr;
+        }
+        .card,
+        .panel,
+        .content-card {
+          padding: 22px;
+        }
+      }
+    </style>
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="brand" href="{% url 'dashboard' %}"
+        >Student Management System</a
+      >
+      <div class="nav-links">
+        <a class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+        <a class="{% if 'student' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'student_list' %}">Students</a>
+        <a class="{% if 'teacher' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'teacher_list' %}">Teachers</a>
+        <a class="{% if 'course' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'course_list' %}">Courses</a>
+        <a class="{% if 'attendance' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'attendance_list' %}">Attendance</a>
+        <a class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">Profile</a>
+      </div>
+    </nav>
+    {% block content %}{% endblock %}
+  </body>
+</html>
