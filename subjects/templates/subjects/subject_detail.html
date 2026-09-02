@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subject Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .detail {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .edit {
+            background: #ffc107;
+            color: black;
+        }
+
+        .back {
+            background: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Subject Details</h1>
+
+    <div class="detail">
+        <span class="label">Subject ID:</span>
+        {{ subject.subject_id }}
+    </div>
+
+    <div class="detail">
+        <span class="label">Subject Code:</span>
+        {{ subject.subject_code }}
+    </div>
+
+    <div class="detail">
+        <span class="label">Subject Name:</span>
+        {{ subject.subject_name }}
+    </div>
+
+    <div class="detail">
+        <span class="label">Description:</span>
+        {{ subject.description }}
+    </div>
+
+    <div class="detail">
+        <span class="label">Credits:</span>
+        {{ subject.credits }}
+    </div>
+
+    <div class="detail">
+        <span class="label">Semester:</span>
+        {{ subject.semester }}
+    </div>
+
+    <div class="detail">
+        <span class="label">Department:</span>
+        {{ subject.department }}
+    </div>
+
+    <a href="{% url 'subject_edit' subject.pk %}"
+       class="btn edit">
+        Edit
+    </a>
+
+    <a href="{% url 'subject_list' %}"
+       class="btn back">
+        Back
+    </a>
+
+</div>
+
+</body>
+</html>
