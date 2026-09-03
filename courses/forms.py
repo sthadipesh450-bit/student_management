@@ -12,6 +12,7 @@ class CourseForm(forms.ModelForm):
             'course_name',
             'description',
             'teacher',
+            'subject',
             'credits',
             'duration',
         ]

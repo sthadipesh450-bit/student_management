@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 from faker import Faker
 
 from courses.models import Course
+from subjects.models import Subject
 from teachers.models import Teacher
 
 
@@ -25,6 +26,7 @@ class Command(BaseCommand):
 
         fake = Faker()
         teachers = list(Teacher.objects.all())
+        available_subjects = list(Subject.objects.all())
         subjects = [
             "Computer Science",
             "Business Studies",
@@ -41,8 +43,9 @@ class Command(BaseCommand):
 
         while len(courses) < count:
             course_id = f"CRS{course_number:04d}"
-            subject = choice(subjects)
-            course_code = f"{subject[:3].upper()}{course_number:03d}"
+            subject_name = choice(subjects)
+            subject = choice(available_subjects) if available_subjects else None
+            course_code = f"{subject_name[:3].upper()}{course_number:03d}"
 
             if course_id in used_course_ids or course_code in used_course_codes:
                 course_number += 1
@@ -52,9 +55,10 @@ class Command(BaseCommand):
                 Course(
                     course_id=course_id,
                     course_code=course_code,
-                    course_name=f"Introduction to {subject}",
+                    course_name=f"Introduction to {subject_name}",
                     description=fake.paragraph(nb_sentences=3),
                     teacher=choice(teachers) if teachers else None,
+                    subject=subject,
                     credits=choice([2, 3, 3, 4]),
                     duration=choice(["8 weeks", "12 weeks", "16 weeks", "6 months"]),
                 )

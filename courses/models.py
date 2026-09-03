@@ -1,5 +1,6 @@
 from django.db import models
 from teachers.models import Teacher
+from subjects.models import Subject
 
 
 class Course(models.Model):
@@ -28,6 +29,14 @@ class Course(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True
+    )
+
+    subject = models.ForeignKey(
+        Subject,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='courses',
     )
 
     credits = models.PositiveIntegerField(

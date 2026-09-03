@@ -11,6 +11,9 @@ class CourseListView(ListView):
     context_object_name = 'courses'
     ordering = ['course_code']
 
+    def get_queryset(self):
+        return Course.objects.select_related('teacher', 'subject').order_by(*self.ordering)
+
 
 class CourseDetailView(DetailView):
     model = Course

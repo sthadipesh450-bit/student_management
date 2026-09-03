@@ -6,15 +6,19 @@ from django.views.generic import (
     DeleteView,
     DetailView
 )
+from django.db.models import Count
 
 from .models import Subject
-from .forms import SubjectForm
+from .form import SubjectForm
 
 
 class SubjectListView(ListView):
     model = Subject
     template_name = 'subjects/subject_list.html'
     context_object_name = 'subjects'
+
+    def get_queryset(self):
+        return Subject.objects.annotate(course_count=Count('courses')).order_by('subject_code')
 
 
 class SubjectDetailView(DetailView):

@@ -1,5 +1,4 @@
-{% extends "base.html" %}{% block title %}Courses{% endblock %}{% block content
-%}
+{% extends "base.html" %}{% block title %}Courses{% endblock %}{% block content %}
 <main class="container">
   <div class="page-header">
     <div>
@@ -14,6 +13,7 @@
         <tr>
           <th>Code</th>
           <th>Course</th>
+          <th>Subject</th>
           <th>Teacher</th>
           <th>Credits</th>
           <th>Duration</th>
@@ -29,6 +29,7 @@
               >{{ course.course_name }}</a
             >
           </td>
+          <td>{{ course.subject|default:"Not assigned" }}</td>
           <td>{{ course.teacher|default:"Not assigned" }}</td>
           <td>{{ course.credits }}</td>
           <td>{{ course.duration }}</td>
@@ -39,7 +40,7 @@
         </tr>
         {% empty %}
         <tr>
-          <td class="empty" colspan="6">No courses yet.</td>
+          <td class="empty" colspan="7">No courses yet.</td>
         </tr>
         {% endfor %}
       </tbody>

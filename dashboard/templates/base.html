@@ -224,6 +224,7 @@
         <a class="{% if 'student' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'student_list' %}">Students</a>
         <a class="{% if 'teacher' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'teacher_list' %}">Teachers</a>
         <a class="{% if 'course' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'course_list' %}">Courses</a>
+        <a class="{% if 'subject' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'subject_list' %}">Subjects</a>
         <a class="{% if 'attendance' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'attendance_list' %}">Attendance</a>
         <a class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">Profile</a>
       </div>
