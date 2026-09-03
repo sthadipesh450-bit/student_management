@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Result{% endblock %}
+
+{% block content %}
+<main class="container narrow">
+  <section class="card">
+    <h1>Delete Result?</h1>
+    <p class="subtitle">
+      Delete the result for {{ object.student }} in {{ object.subject }}?
+    </p>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="actions">
+        <a class="button secondary" href="{% url 'result_list' %}">
+          Cancel
+        </a>
+        <button class="danger" type="submit">Delete Result</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}

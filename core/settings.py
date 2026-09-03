@@ -49,6 +49,7 @@ PROJECT_APPS = [
     "teachers",
     "courses",
     "subjects",
+    "results",
 
 ]
 

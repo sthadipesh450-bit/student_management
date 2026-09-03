@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Result Details{% endblock %}
+
+{% block content %}
+<main class="container narrow">
+  <a class="back" href="{% url 'result_list' %}">← Back to results</a>
+
+  <section class="card">
+    <h1>{{ result.student }} - {{ result.subject }}</h1>
+    <dl class="details">
+      <div><dt>Result ID</dt><dd>{{ result.result_id }}</dd></div>
+      <div><dt>Exam</dt><dd>{{ result.exam_type }}</dd></div>
+      <div><dt>Marks</dt><dd>{{ result.marks }} / {{ result.full_marks }}</dd></div>
+      <div><dt>Grade</dt><dd>{{ result.grade }}</dd></div>
+      <div><dt>GPA</dt><dd>{{ result.gpa }}</dd></div>
+      <div><dt>Remarks</dt><dd>{{ result.remarks|default:"No remarks" }}</dd></div>
+    </dl>
+  </section>
+</main>
+{% endblock %}

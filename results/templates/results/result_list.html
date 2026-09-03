@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="page-header">
+    <div>
+      <h1>Results</h1>
+      <p class="subtitle">Manage student examination results.</p>
+    </div>
+    <a class="button" href="{% url 'result_add' %}">+ Add Result</a>
+  </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Result ID</th>
+      <th>Student</th>
+      <th>Subject</th>
+      <th>Exam</th>
+      <th>Marks</th>
+      <th>Grade</th>
+      <th>GPA</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for result in results %}
+    <tr>
+      <td>{{ result.result_id }}</td>
+      <td>{{ result.student }}</td>
+      <td>{{ result.subject }}</td>
+      <td>{{ result.exam_type }}</td>
+      <td>{{ result.marks }} / {{ result.full_marks }}</td>
+      <td>{{ result.grade }}</td>
+      <td>{{ result.gpa }}</td>
+      <td>
+        <a href="{% url 'result_detail' result.pk %}">View</a> ·
+        <a href="{% url 'result_edit' result.pk %}">Edit</a> ·
+        <a href="{% url 'result_delete' result.pk %}">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td class="empty" colspan="8">No results available.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</main>
+{% endblock %}

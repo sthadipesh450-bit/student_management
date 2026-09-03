@@ -217,16 +217,49 @@
   <body>
     <nav class="navbar">
       <a class="brand" href="{% url 'dashboard' %}"
-        >Student Management System</a
+        >ClassFlow</a
       >
       <div class="nav-links">
-        <a class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
-        <a class="{% if 'student' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'student_list' %}">Students</a>
-        <a class="{% if 'teacher' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'teacher_list' %}">Teachers</a>
-        <a class="{% if 'course' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'course_list' %}">Courses</a>
-        <a class="{% if 'subject' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'subject_list' %}">Subjects</a>
-        <a class="{% if 'attendance' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'attendance_list' %}">Attendance</a>
-        <a class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">Profile</a>
+        <a
+          class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+          href="{% url 'dashboard' %}"
+          >Dashboard</a
+        >
+        <a
+          class="{% if 'student' in request.resolver_match.url_name %}active{% endif %}"
+          href="{% url 'student_list' %}"
+          >Students</a
+        >
+        <a
+          class="{% if 'teacher' in request.resolver_match.url_name %}active{% endif %}"
+          href="{% url 'teacher_list' %}"
+          >Teachers</a
+        >
+        <a
+          class="{% if 'course' in request.resolver_match.url_name %}active{% endif %}"
+          href="{% url 'course_list' %}"
+          >Courses</a
+        >
+        <a
+          class="{% if 'subject' in request.resolver_match.url_name %}active{% endif %}"
+          href="{% url 'subject_list' %}"
+          >Subjects</a
+        >
+        <a
+          class="{% if 'result' in request.resolver_match.url_name %}active{% endif %}"
+          href="{% url 'result_list' %}"
+          >Results
+        </a>
+        <a
+          class="{% if 'attendance' in request.resolver_match.url_name %}active{% endif %}"
+          href="{% url 'attendance_list' %}"
+          >Attendance</a
+        >
+        <a
+          class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}"
+          href="{% url 'profile' %}"
+          >Profile</a
+        >
       </div>
     </nav>
     {% block content %}{% endblock %}

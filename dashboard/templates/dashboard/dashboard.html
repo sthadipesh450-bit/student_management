@@ -1,5 +1,40 @@
-{% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Dashboard{% endblock %} 
 {% block content %}
-<main class="container"><div class="page-header"><div><h1>Dashboard</h1><p class="subtitle">Welcome to the Student Management System.</p></div></div><section class="details"><div><dt>Total Students</dt><dd>{{ total_students }}</dd></div><div><dt>Courses</dt><dd>{{ total_courses }}</dd></div><div><dt>Subjects</dt><dd>{{ total_subjects }}</dd></div><div><dt>Attendance Records</dt><dd>{{ total_attendance }}</dd></div></section><section class="card" style="margin-top:26px"><h2>Quick Actions</h2><div class="actions"><a class="button" href="{% url 'student_add' %}">Add Student</a><a class="button" href="{% url 'teacher_add' %}">Add Teacher</a><a class="button" href="{% url 'subject_add' %}">Add Subject</a><a class="button" href="{% url 'course_add' %}">Add Course</a><a class="button" href="{% url 'attendance_add' %}">Add Attendance</a></div></section></main>
+<main class="container">
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="subtitle"></p>
+    </div>
+  </div>
+  <section class="details">
+    <div>
+      <dt>Total Students</dt>
+      <dd>{{ total_students }}</dd>
+    </div>
+    <div>
+      <dt>Courses</dt>
+      <dd>{{ total_courses }}</dd>
+    </div>
+    <div>
+      <dt>Subjects</dt>
+      <dd>{{ total_subjects }}</dd>
+    </div>
+    <div>
+      <dt>Attendance Records</dt>
+      <dd>{{ total_attendance }}</dd>
+    </div>
+  </section>
+  <section class="card" style="margin-top: 26px">
+    <h2>Quick Actions</h2>
+    <div class="actions">
+      <a class="button" href="{% url 'student_add' %}">Add Student</a
+      ><a class="button" href="{% url 'teacher_add' %}">Add Teacher</a
+      ><a class="button" href="{% url 'subject_add' %}">Add Subject</a
+      ><a class="button" href="{% url 'course_add' %}">Add Course</a
+      ><a class="button" href="{% url 'attendance_add' %}">Add Attendance</a>
+    </div>
+  </section>
+</main>
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit Result{% else %}Add Result{% endif %}{% endblock %}
+
+{% block content %}
+<main class="container narrow">
+  <a class="back" href="{% url 'result_list' %}">← Back to results</a>
+
+  <section class="card">
+    <h1>{% if object %}Edit Result{% else %}Add Result{% endif %}</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="actions">
+        <a class="button secondary" href="{% url 'result_list' %}">
+          Cancel
+        </a>
+        <button type="submit">Save Result</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}
