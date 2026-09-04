@@ -188,6 +188,12 @@
       .details dd {
         margin: 6px 0 0;
       }
+      .dashboard-columns {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 26px;
+        margin-top: 26px;
+      }
       @media (max-width: 700px) {
         .navbar {
           align-items: flex-start;
@@ -205,6 +211,9 @@
         .details {
           grid-template-columns: 1fr;
         }
+        .dashboard-columns {
+          grid-template-columns: 1fr;
+        }
         .card,
         .panel,
         .content-card {
@@ -216,9 +225,7 @@
   </head>
   <body>
     <nav class="navbar">
-      <a class="brand" href="{% url 'dashboard' %}"
-        >ClassFlow</a
-      >
+      <a class="brand" href="{% url 'dashboard' %}">ClassFlow</a>
       <div class="nav-links">
         <a
           class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
