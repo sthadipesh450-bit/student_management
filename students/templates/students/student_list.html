@@ -1,3 +1,205 @@
-{% extends "base.html" %}
-{% block title %}Students{% endblock %}
-{% block content %}<main class="container"><div class="page-header"><div><h1>Students</h1><p class="subtitle">Manage student records.</p></div><a class="button" href="{% url 'student_add' %}">Add Student</a></div><section class="content-card table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Email</th><th>Phone</th><th>Course</th><th>Address</th><th>Actions</th></tr></thead><tbody>{% for student in students %}<tr><td>{{ student.student_id }}</td><td>{{ student.name }}</td><td>{{ student.age }}</td><td>{{ student.email }}</td><td>{{ student.phone }}</td><td>{{ student.course }}</td><td>{{ student.address }}</td><td><a href="{% url 'student_edit' student.pk %}">Edit</a> · <a href="{% url 'student_delete' student.pk %}">Delete</a></td></tr>{% empty %}<tr><td class="empty" colspan="8">No students found.</td></tr>{% endfor %}</tbody></table></section>{% if is_paginated %}<p class="actions">{% if page_obj.has_previous %}<a href="?page=1">First</a><a href="?page={{ page_obj.previous_page_number }}">Previous</a>{% endif %} Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next</a><a href="?page={{ page_obj.paginator.num_pages }}">Last</a>{% endif %}</p>{% endif %}</main>{% endblock %}
+{% extends "base.html" %} {% block title %}Students | ClassFlow{% endblock %} 
+{% block extra_head %}
+<style>
+  .students-page {
+    width: min(1180px, calc(100% - 48px));
+    margin: 36px auto 64px;
+  }
+  .students-hero {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 34px 38px;
+    color: #fff;
+    background: linear-gradient(120deg, #172554, #24477d 58%, #087f82);
+    border-radius: 18px;
+    box-shadow: 0 18px 34px #1725542b;
+  }
+  .students-hero h1 {
+    margin: 0 0 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.1rem, 5vw, 3.35rem);
+    font-weight: 500;
+  }
+  .students-eyebrow {
+    margin: 0 0 10px;
+    color: #9ee7df;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .students-hero .subtitle {
+    max-width: 560px;
+    color: #d9ecf1;
+  }
+  .students-hero .button {
+    flex: 0 0 auto;
+    color: #172554;
+    background: #fff;
+  }
+  .students-toolbar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 34px 0 14px;
+  }
+  .students-toolbar h2 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  .students-toolbar p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+  .student-count {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 7px 12px;
+    color: #155e63;
+    background: #eaf4f5;
+    border: 1px solid #d4e7e8;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 750;
+  }
+  .students-table {
+    padding: 10px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px #283b6e0d;
+  }
+  .students-table table {
+    min-width: 850px;
+  }
+  .students-table th {
+    background: #f7fafc;
+  }
+  .students-table td {
+    padding: 15px 14px;
+  }
+  .student-name {
+    color: var(--ink);
+    font-weight: 750;
+  }
+  .student-actions {
+    white-space: nowrap;
+  }
+  .student-actions a + a {
+    margin-left: 12px;
+    color: var(--danger);
+  }
+  .students-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px 0 0;
+    color: var(--muted);
+  }
+  .students-pagination a {
+    color: var(--primary);
+    font-weight: 750;
+    text-decoration: none;
+  }
+  @media (max-width: 600px) {
+    .students-page {
+      width: calc(100% - 32px);
+      margin-top: 24px;
+    }
+    .students-hero {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 26px;
+    }
+    .students-hero .button {
+      width: 100%;
+    }
+    .students-toolbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    .students-table {
+      padding: 6px;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+<main class="students-page">
+  <header class="students-hero">
+    <div>
+      <p class="students-eyebrow">Student directory</p>
+      <h1>Students</h1>
+      <p class="subtitle">
+        Keep every student record clear, current, and easy to find.
+      </p>
+    </div>
+    <a class="button" href="{% url 'student_add' %}">Add a student</a>
+  </header>
+  <div class="students-toolbar">
+    <div>
+      <h2>All student records</h2>
+      <p>Review contact details, course placement, and actions.</p>
+    </div>
+    {% if is_paginated %}<span class="student-count"
+      >{{ page_obj.paginator.count }} students</span
+    >{% endif %}
+  </div>
+  <section class="students-table table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Course</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ student.student_id }}</td>
+          <td class="student-name">{{ student.name }}</td>
+          <td>{{ student.age }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.phone }}</td>
+          <td>{{ student.course }}</td>
+          <td>{{ student.address }}</td>
+          <td class="student-actions">
+            <a href="{% url 'student_edit' student.pk %}">Edit</a> ·
+            <a href="{% url 'student_delete' student.pk %}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="empty" colspan="8">No students found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% if is_paginated %}
+  <p class="students-pagination">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span
+      >Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span
+    >
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+  </p>
+  {% endif %}
+</main>
+{% endblock %}

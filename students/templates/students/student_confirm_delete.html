@@ -1,1 +1,17 @@
-{% extends "base.html" %}{% block title %}Delete Student{% endblock %}{% block content %}<main class="container narrow"><section class="card"><h1>Delete Student</h1><p class="subtitle">Are you sure you want to delete <strong>{{ object.name }}</strong>?</p><form method="post">{% csrf_token %}<div class="form-actions"><a class="button secondary" href="{% url 'student_list' %}">Cancel</a><button class="danger" type="submit">Yes, Delete</button></div></form></section></main>{% endblock %}
+{% extends "base.html" %}{% block title %}Delete Student{% endblock %}{% block content %}
+<main class="container narrow">
+  <section class="card">
+    <h1>Delete Student</h1>
+    <p class="subtitle">
+      Are you sure you want to delete <strong>{{ object.name }}</strong>?
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-actions">
+        <a class="button secondary" href="{% url 'student_list' %}">Cancel</a
+        ><button class="danger" type="submit">Yes, Delete</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}

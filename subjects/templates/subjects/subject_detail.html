@@ -1,5 +1,39 @@
-{% extends "base.html" %}
-{% block title %}{{ subject.subject_name }}{% endblock %}
+{% extends "base.html" %} {% block title %}{{ subject.subject_name }}{% endblock %} 
 {% block content %}
-<main class="container narrow"><a class="back" href="{% url 'subject_list' %}">← Back to subjects</a><section class="card"><div class="page-header"><div><h1>{{ subject.subject_name }}</h1><p class="subtitle">{{ subject.subject_code }}</p></div><a class="button" href="{% url 'subject_edit' subject.pk %}">Edit Subject</a></div><dl class="details"><div><dt>Subject ID</dt><dd>{{ subject.subject_id }}</dd></div><div><dt>Credits</dt><dd>{{ subject.credits }}</dd></div><div><dt>Semester</dt><dd>{{ subject.semester }}</dd></div><div><dt>Department</dt><dd>{{ subject.department }}</dd></div><div><dt>Description</dt><dd>{{ subject.description|default:"No description provided." }}</dd></div></dl></section></main>
+<main class="container narrow">
+  <a class="back" href="{% url 'subject_list' %}">← Back to subjects</a>
+  <section class="card">
+    <div class="page-header">
+      <div>
+        <h1>{{ subject.subject_name }}</h1>
+        <p class="subtitle">{{ subject.subject_code }}</p>
+      </div>
+      <a class="button" href="{% url 'subject_edit' subject.pk %}"
+        >Edit Subject</a
+      >
+    </div>
+    <dl class="details">
+      <div>
+        <dt>Subject ID</dt>
+        <dd>{{ subject.subject_id }}</dd>
+      </div>
+      <div>
+        <dt>Credits</dt>
+        <dd>{{ subject.credits }}</dd>
+      </div>
+      <div>
+        <dt>Semester</dt>
+        <dd>{{ subject.semester }}</dd>
+      </div>
+      <div>
+        <dt>Department</dt>
+        <dd>{{ subject.department }}</dd>
+      </div>
+      <div>
+        <dt>Description</dt>
+        <dd>{{ subject.description|default:"No description provided." }}</dd>
+      </div>
+    </dl>
+  </section>
+</main>
 {% endblock %}

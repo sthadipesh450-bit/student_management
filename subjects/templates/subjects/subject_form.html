@@ -1,5 +1,15 @@
-{% extends "base.html" %}
-{% block title %}Subject Form{% endblock %}
-{% block content %}
-<main class="container narrow"><a class="back" href="{% url 'subject_list' %}">← Back to subjects</a><section class="card"><h1>{% if object %}Edit Subject{% else %}Add Subject{% endif %}</h1><form method="post">{% csrf_token %}{{ form.as_p }}<div class="actions"><a class="button secondary" href="{% url 'subject_list' %}">Cancel</a><button type="submit">Save Subject</button></div></form></section></main>
+{% extends "base.html" %} {% block title %}Subject Form{% endblock %} {% block content %}
+<main class="container narrow">
+  <a class="back" href="{% url 'subject_list' %}">← Back to subjects</a>
+  <section class="card">
+    <h1>{% if object %}Edit Subject{% else %}Add Subject{% endif %}</h1>
+    <form method="post">
+      {% csrf_token %}{{ form.as_p }}
+      <div class="actions">
+        <a class="button secondary" href="{% url 'subject_list' %}">Cancel</a
+        ><button type="submit">Save Subject</button>
+      </div>
+    </form>
+  </section>
+</main>
 {% endblock %}

@@ -1,5 +1,50 @@
-{% extends "base.html" %}
-{% block title %}Subjects{% endblock %}
-{% block content %}
-<main class="container"><div class="page-header"><div><h1>Subjects</h1><p class="subtitle">Manage subjects and link them to courses.</p></div><a class="button" href="{% url 'subject_add' %}">+ Add Subject</a></div><section class="content-card table-wrap"><table><thead><tr><th>Code</th><th>Subject</th><th>Credits</th><th>Semester</th><th>Department</th><th>Courses</th><th>Actions</th></tr></thead><tbody>{% for subject in subjects %}<tr><td>{{ subject.subject_code }}</td><td><a href="{% url 'subject_detail' subject.pk %}">{{ subject.subject_name }}</a></td><td>{{ subject.credits }}</td><td>{{ subject.semester }}</td><td>{{ subject.department }}</td><td>{{ subject.course_count }}</td><td><a href="{% url 'subject_edit' subject.pk %}">Edit</a> · <a href="{% url 'subject_delete' subject.pk %}">Delete</a></td></tr>{% empty %}<tr><td class="empty" colspan="7">No subjects yet.</td></tr>{% endfor %}</tbody></table></section></main>
+{% extends "base.html" %} {% block title %}Subjects{% endblock %} {% block content %}
+<main class="container">
+  <div class="page-header">
+    <div>
+      <h1>Subjects</h1>
+      <p class="subtitle">Manage subjects and link them to courses.</p>
+    </div>
+    <a class="button" href="{% url 'subject_add' %}">+ Add Subject</a>
+  </div>
+  <section class="content-card table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Subject</th>
+          <th>Credits</th>
+          <th>Semester</th>
+          <th>Department</th>
+          <th>Courses</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject in subjects %}
+        <tr>
+          <td>{{ subject.subject_code }}</td>
+          <td>
+            <a href="{% url 'subject_detail' subject.pk %}"
+              >{{ subject.subject_name }}</a
+            >
+          </td>
+          <td>{{ subject.credits }}</td>
+          <td>{{ subject.semester }}</td>
+          <td>{{ subject.department }}</td>
+          <td>{{ subject.course_count }}</td>
+          <td>
+            <a href="{% url 'subject_edit' subject.pk %}">Edit</a> ·
+            <a href="{% url 'subject_delete' subject.pk %}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="empty" colspan="7">No subjects yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</main>
 {% endblock %}

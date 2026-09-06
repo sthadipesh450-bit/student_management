@@ -1,1 +1,15 @@
-{% extends "base.html" %}{% block title %}Student Form{% endblock %}{% block content %}<main class="container narrow"><a class="back" href="{% url 'student_list' %}">← Back to students</a><section class="card"><h1>{% if object %}Update Student{% else %}Add Student{% endif %}</h1><form method="post">{% csrf_token %}{{ form.as_p }}<div class="form-actions"><a class="button secondary" href="{% url 'student_list' %}">Cancel</a><button type="submit">Save Student</button></div></form></section></main>{% endblock %}
+{% extends "base.html" %}{% block title %}Student Form{% endblock %}{% block content %}
+<main class="container narrow">
+  <a class="back" href="{% url 'student_list' %}">← Back to students</a>
+  <section class="card">
+    <h1>{% if object %}Update Student{% else %}Add Student{% endif %}</h1>
+    <form method="post">
+      {% csrf_token %}{{ form.as_p }}
+      <div class="form-actions">
+        <a class="button secondary" href="{% url 'student_list' %}">Cancel</a
+        ><button type="submit">Save Student</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}
