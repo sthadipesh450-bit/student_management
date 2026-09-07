@@ -1,1 +1,24 @@
-{% extends "base.html" %}{% block title %}Delete Teacher{% endblock %}{% block content %}<main class="container narrow"><section class="card"><h1>Delete Teacher</h1><p class="subtitle">Are you sure you want to delete <strong>{{ object.first_name }} {{ object.last_name }}</strong>?</p><form method="post">{% csrf_token %}<div class="form-actions"><a class="button secondary" href="{% url 'teacher_list' %}">Cancel</a><button class="danger" type="submit">Yes, Delete</button></div></form></section></main>{% endblock %}
+{% extends "base.html" %}{% load static %}{% block title %}Delete Teacher
+{% endblock %}{% block extra_head %}<link
+  rel="stylesheet"
+  href="{% static 'teachers/css/teachers.css' %}"
+/>{% endblock %}{% block content %}
+<main class="container narrow">
+  <section class="card teacher-card delete-card">
+    <span class="warning-mark" aria-hidden="true">!</span>
+    <p class="eyebrow">Remove from directory</p>
+    <h1>Delete Teacher</h1>
+    <p class="subtitle">
+      Are you sure you want to delete
+      <strong>{{ object.first_name }} {{ object.last_name }}</strong>?
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-actions">
+        <a class="button secondary" href="{% url 'teacher_list' %}">Cancel</a
+        ><button class="danger" type="submit">Yes, Delete</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}

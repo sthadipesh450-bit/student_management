@@ -1,1 +1,92 @@
-{% extends "base.html" %}{% block title %}Teachers{% endblock %}{% block content %}<main class="container"><div class="page-header"><div><h1>Teachers</h1><p class="subtitle">Manage teaching staff.</p></div><a class="button" href="{% url 'teacher_add' %}">Add Teacher</a></div><section class="content-card table-wrap"><table><thead><tr><th>Teacher ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Subject</th><th>Actions</th></tr></thead><tbody>{% for teacher in teachers %}<tr><td>{{ teacher.teacher_id }}</td><td><a href="{% url 'teacher_detail' teacher.pk %}">{{ teacher.first_name }} {{ teacher.last_name }}</a></td><td>{{ teacher.email }}</td><td>{{ teacher.phone }}</td><td>{{ teacher.subject }}</td><td><a href="{% url 'teacher_edit' teacher.pk %}">Edit</a> · <a href="{% url 'teacher_delete' teacher.pk %}">Delete</a></td></tr>{% empty %}<tr><td class="empty" colspan="6">No teachers found.</td></tr>{% endfor %}</tbody></table></section></main>{% endblock %}
+{% extends "base.html" %} {% load static %} {% block title %}Teachers 
+{% endblock %} {% block extra_head %}
+<link rel="stylesheet" href="{% static 'teachers/css/teachers.css' %}" />
+{% endblock %} {% block content %}
+<main class="container teachers-page">
+  <section class="teachers-hero">
+    <div>
+      <p class="eyebrow">People and teaching</p>
+      <h1>Teachers</h1>
+      <p class="subtitle">
+        Keep your teaching team organized and easy to reach.
+      </p>
+    </div>
+    <a class="button hero-button" href="{% url 'teacher_add' %}"
+      ><span aria-hidden="true">+</span> Add teacher</a
+    >
+  </section>
+
+  <section class="roster-bar" aria-label="Teacher roster summary">
+    <div class="roster-icon" aria-hidden="true">T</div>
+    <div>
+      <strong
+        >{{ teachers|length }} teacher{{ teachers|length|pluralize }}</strong
+      >
+      <span>Currently listed in your teaching roster</span>
+    </div>
+    <span class="roster-status">Directory up to date</span>
+  </section>
+
+  <section class="content-card teacher-roster">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Staff directory</p>
+        <h2>Teaching roster</h2>
+      </div>
+      <span class="record-count"
+        >{{ teachers|length }} record{{ teachers|length|pluralize }}</span
+      >
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Teacher ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Subject</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for teacher in teachers %}
+          <tr>
+            <td><span class="teacher-id">{{ teacher.teacher_id }}</span></td>
+            <td>
+              <a
+                class="teacher-name"
+                href="{% url 'teacher_detail' teacher.pk %}"
+                ><span class="name-avatar"
+                  ><span>{{ teacher.first_name|first|upper }}</span
+                  ><span>{{ teacher.last_name|first|upper }}</span></span
+                ><span
+                  >{{ teacher.first_name }} {{ teacher.last_name }}</span
+                ></a
+              >
+            </td>
+            <td class="muted-cell">{{ teacher.email }}</td>
+            <td class="muted-cell">{{ teacher.phone }}</td>
+            <td><span class="subject-tag">{{ teacher.subject }}</span></td>
+            <td class="row-actions">
+              <a href="{% url 'teacher_edit' teacher.pk %}">Edit</a
+              ><a
+                class="delete-link"
+                href="{% url 'teacher_delete' teacher.pk %}"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="empty" colspan="6">
+              No teachers found. Add your first teacher to build the roster.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,1 +1,39 @@
-{% extends "base.html" %}{% block title %}Teacher Details{% endblock %}{% block content %}<main class="container narrow"><a class="back" href="{% url 'teacher_list' %}">← Back to teachers</a><section class="card"><div class="page-header"><div><h1>{{ teacher.first_name }} {{ teacher.last_name }}</h1><p class="subtitle">{{ teacher.teacher_id }}</p></div><a class="button" href="{% url 'teacher_edit' teacher.pk %}">Edit Teacher</a></div><dl class="details"><div><dt>Email</dt><dd>{{ teacher.email }}</dd></div><div><dt>Phone</dt><dd>{{ teacher.phone }}</dd></div><div><dt>Subject</dt><dd>{{ teacher.subject }}</dd></div><div><dt>Address</dt><dd>{{ teacher.address }}</dd></div><div><dt>Joined date</dt><dd>{{ teacher.joined_date }}</dd></div></dl></section></main>{% endblock %}
+{% extends "base.html" %}{% load static %}{% block title %}Teacher Details{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'teachers/css/teachers.css' %}">{% endblock %}{% block content %}
+<main class="container narrow">
+  <a class="back" href="{% url 'teacher_list' %}">← Back to teachers</a>
+  <section class="card teacher-card">
+    <div class="page-header">
+      <div>
+        <h1>{{ teacher.first_name }} {{ teacher.last_name }}</h1>
+        <p class="subtitle">{{ teacher.teacher_id }}</p>
+      </div>
+      <a class="button" href="{% url 'teacher_edit' teacher.pk %}"
+        >Edit Teacher</a
+      >
+    </div>
+    <dl class="details">
+      <div>
+        <dt>Email</dt>
+        <dd>{{ teacher.email }}</dd>
+      </div>
+      <div>
+        <dt>Phone</dt>
+        <dd>{{ teacher.phone }}</dd>
+      </div>
+      <div>
+        <dt>Subject</dt>
+        <dd>{{ teacher.subject }}</dd>
+      </div>
+      <div>
+        <dt>Address</dt>
+        <dd>{{ teacher.address }}</dd>
+      </div>
+      <div>
+        <dt>Joined date</dt>
+        <dd>{{ teacher.joined_date }}</dd>
+      </div>
+    </dl>
+  </section>
+</main>
+{% endblock %}

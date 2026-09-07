@@ -1,0 +1,275 @@
+.teachers-page {
+  margin-top: 52px;
+}
+
+.teacher-subpage {
+  margin-top: 44px;
+}
+
+.teacher-card {
+  border-top: 4px solid #168783;
+}
+
+.form-intro {
+  margin-bottom: 26px;
+}
+
+.form-card h1 {
+  margin-bottom: 8px;
+}
+
+.delete-card {
+  text-align: center;
+}
+
+.delete-card .subtitle {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.delete-card .form-actions {
+  justify-content: center;
+}
+
+.warning-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  color: #9a5b11;
+  background: #fff0c7;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.teachers-hero {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px 38px;
+  color: #fff;
+  background: linear-gradient(120deg, #173b62, #235f70 62%, #2b807d);
+  border-radius: 18px;
+  box-shadow: 0 18px 34px rgba(23, 59, 98, .18);
+}
+
+.teachers-hero h1 {
+  margin-bottom: 10px;
+  letter-spacing: -.04em;
+}
+
+.teachers-hero .subtitle {
+  max-width: 480px;
+  color: #d6edf0;
+}
+
+.eyebrow {
+  margin: 0 0 9px;
+  color: #168783;
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.teachers-hero .eyebrow {
+  color: #a9e8e1;
+}
+
+.hero-button {
+  flex-shrink: 0;
+  color: #173b62;
+  background: #f6c85f;
+}
+
+.hero-button:hover,
+.hero-button:focus-visible {
+  color: #173b62;
+  background: #ffd879;
+}
+
+.hero-button span {
+  margin-right: 8px;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.roster-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0;
+  padding: 14px 18px;
+  border: 1px solid #d7e7e8;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .76);
+}
+
+.roster-icon,
+.name-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: #168783;
+  font-weight: 800;
+}
+
+.roster-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.roster-bar strong,
+.roster-bar span {
+  display: block;
+}
+
+.roster-bar strong {
+  color: #173b62;
+}
+
+.roster-bar div:nth-child(2) span {
+  margin-top: 2px;
+  color: #68738a;
+  font-size: .84rem;
+}
+
+.roster-status {
+  margin-left: auto;
+  color: #168783;
+  font-size: .78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.teacher-roster {
+  padding: 0;
+  overflow: hidden;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 26px 28px 20px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: #173b62;
+  font-size: 1.35rem;
+}
+
+.record-count {
+  color: #68738a;
+  font-size: .86rem;
+}
+
+.teacher-roster table {
+  min-width: 880px;
+}
+
+.teacher-roster th {
+  color: #58717d;
+  background: #f1f8f8;
+}
+
+.teacher-roster td {
+  height: 70px;
+  padding: 12px 14px;
+}
+
+.teacher-roster tbody tr {
+  transition: background .15s ease;
+}
+
+.teacher-roster tbody tr:hover {
+  background: #fbfdfd;
+}
+
+.teacher-id {
+  color: #68738a;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: .82rem;
+}
+
+.teacher-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #173b62 !important;
+}
+
+.name-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #173b62;
+  background: #f6c85f;
+  font-size: 0;
+}
+
+.name-avatar span {
+  font-size: .72rem;
+}
+
+.muted-cell {
+  color: #68738a;
+  font-size: .9rem;
+}
+
+.subject-tag {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 6px;
+  color: #176c69;
+  background: #e3f3f1;
+  font-size: .78rem;
+  font-weight: 750;
+}
+
+.row-actions {
+  white-space: nowrap;
+}
+
+.row-actions a + a {
+  margin-left: 12px;
+}
+
+.row-actions .delete-link {
+  color: #b04b54;
+}
+
+@media (max-width: 700px) {
+  .teachers-page {
+    margin-top: 34px;
+  }
+
+  .teachers-hero {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 26px 24px;
+  }
+
+  .hero-button {
+    width: 100%;
+  }
+
+  .roster-status {
+    display: none !important;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 22px;
+  }
+}

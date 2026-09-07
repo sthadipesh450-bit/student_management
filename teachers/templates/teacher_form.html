@@ -1,1 +1,23 @@
-{% extends "base.html" %}{% block title %}Teacher Form{% endblock %}{% block content %}<main class="container narrow"><a class="back" href="{% url 'teacher_list' %}">← Back to teachers</a><section class="card"><h1>{% if object %}Update Teacher{% else %}Add Teacher{% endif %}</h1><form method="post">{% csrf_token %}{{ form.as_p }}<div class="form-actions"><a class="button secondary" href="{% url 'teacher_list' %}">Cancel</a><button type="submit">Save Teacher</button></div></form></section></main>{% endblock %}
+{% extends "base.html" %}{% load static %}{% block title %}Teacher Form
+{% endblock %}{% block extra_head %}<link
+  rel="stylesheet"
+  href="{% static 'teachers/css/teachers.css' %}"
+/>{% endblock %}{% block content %}
+<main class="container narrow">
+  <a class="back" href="{% url 'teacher_list' %}">← Back to teachers</a>
+  <section class="card teacher-card form-card">
+    <p class="eyebrow">Staff directory</p>
+    <h1>{% if object %}Update Teacher{% else %}Add Teacher{% endif %}</h1>
+    <p class="subtitle form-intro">
+      Add the contact details and teaching assignment for this staff member.
+    </p>
+    <form method="post">
+      {% csrf_token %}{{ form.as_p }}
+      <div class="form-actions">
+        <a class="button secondary" href="{% url 'teacher_list' %}">Cancel</a
+        ><button type="submit">Save Teacher</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}
