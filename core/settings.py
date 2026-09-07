@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-c+97s)z7sx&1v45ces8m10++dzi=t42^@i4x8p=)a2+vsqd+h1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'student-management-five-phi.vercel.app',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
