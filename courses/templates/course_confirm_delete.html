@@ -1,7 +1,12 @@
-{% extends "base.html" %}{% block title %}Delete Course{% endblock %}{% block
-content %}
-<main class="container narrow">
-  <section class="card">
+{% extends "base.html" %}{% load static %}{% block title %}Delete Course
+{% endblock %}{% block extra_head %}<link
+  rel="stylesheet"
+  href="{% static 'courses/css/courses.css' %}"
+/>{% endblock %}{% block content %}
+<main class="container narrow course-subpage">
+  <section class="card course-card delete-card">
+    <span class="warning-mark" aria-hidden="true">!</span>
+    <p class="eyebrow">Remove from catalog</p>
     <h1>Delete {{ course.course_name }}?</h1>
     <p class="subtitle">This action cannot be undone.</p>
     <form method="post">

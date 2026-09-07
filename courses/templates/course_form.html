@@ -1,8 +1,16 @@
-{% extends "base.html" %}{% block title %}Course Form{% endblock %}{% block content %}
-<main class="container narrow">
+{% extends "base.html" %}{% load static %}{% block title %}Course Form
+{% endblock %}{% block extra_head %}<link
+  rel="stylesheet"
+  href="{% static 'courses/css/courses.css' %}"
+/>{% endblock %}{% block content %}
+<main class="container narrow course-subpage">
   <a class="back" href="{% url 'course_list' %}">← Back to courses</a>
-  <section class="card">
+  <section class="card course-card form-card">
+    <p class="eyebrow">Academic catalog</p>
     <h1>{% if object %}Edit Course{% else %}Add Course{% endif %}</h1>
+    <p class="subtitle form-intro">
+      Define the course details, ownership, and workload for your catalog.
+    </p>
     <form method="post">
       {% csrf_token %}{{ form.as_p }}
       <div class="actions">

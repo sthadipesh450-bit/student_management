@@ -1,50 +1,86 @@
-{% extends "base.html" %}{% block title %}Courses{% endblock %}{% block content %}
-<main class="container">
-  <div class="page-header">
+{% extends "base.html" %} {% load static %} {% block extra_head %}
+<link rel="stylesheet" href="{% static 'courses/css/courses.css' %}" />
+{% endblock %} {% block content %}
+<main class="container courses-page">
+  <section class="courses-hero">
     <div>
+      <p class="eyebrow">Academic catalog</p>
       <h1>Courses</h1>
-      <p class="subtitle">Manage your institution's courses.</p>
+      <p class="subtitle">
+        Build a clear, connected curriculum for every learner.
+      </p>
     </div>
-    <a class="button" href="{% url 'course_add' %}">+ Add Course</a>
-  </div>
-  <section class="content-card table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Course</th>
-          <th>Subject</th>
-          <th>Teacher</th>
-          <th>Credits</th>
-          <th>Duration</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for course in courses %}
-        <tr>
-          <td>{{ course.course_code }}</td>
-          <td>
-            <a href="{% url 'course_detail' course.pk %}"
-              >{{ course.course_name }}</a
-            >
-          </td>
-          <td>{{ course.subject|default:"Not assigned" }}</td>
-          <td>{{ course.teacher|default:"Not assigned" }}</td>
-          <td>{{ course.credits }}</td>
-          <td>{{ course.duration }}</td>
-          <td>
-            <a href="{% url 'course_edit' course.pk %}">Edit</a> ·
-            <a href="{% url 'course_delete' course.pk %}">Delete</a>
-          </td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td class="empty" colspan="7">No courses yet.</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <a class="button hero-button" href="{% url 'course_add' %}"
+      ><span aria-hidden="true">+</span> Add course</a
+    >
+  </section>
+  <section class="catalog-bar" aria-label="Course catalog summary">
+    <div class="catalog-icon" aria-hidden="true">C</div>
+    <div>
+      <strong>{{ courses|length }} course{{ courses|length|pluralize }}</strong
+      ><span>Available in the academic catalog</span>
+    </div>
+    <span class="catalog-status">Catalog overview</span>
+  </section>
+  <section class="content-card course-catalog">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Course directory</p>
+        <h2>Current curriculum</h2>
+      </div>
+      <span class="record-count"
+        >{{ courses|length }} record{{ courses|length|pluralize }}</span
+      >
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Course</th>
+            <th>Subject</th>
+            <th>Teacher</th>
+            <th>Credits</th>
+            <th>Duration</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in courses %}
+          <tr>
+            <td><span class="course-code">{{ course.course_code }}</span></td>
+            <td>
+              <a class="course-name" href="{% url 'course_detail' course.pk %}"
+                >{{ course.course_name }}</a
+              >
+            </td>
+            <td>
+              <span class="subject-tag"
+                >{{ course.subject|default:"Not assigned" }}</span
+              >
+            </td>
+            <td class="muted-cell">
+              {{ course.teacher|default:"Not assigned" }}
+            </td>
+            <td><span class="credit-value">{{ course.credits }} cr</span></td>
+            <td class="muted-cell">{{ course.duration }}</td>
+            <td class="row-actions">
+              <a href="{% url 'course_edit' course.pk %}">Edit</a
+              ><a class="delete-link" href="{% url 'course_delete' course.pk %}"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="empty" colspan="7">
+              No courses yet. Add your first course to start the catalog.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </section>
 </main>
 {% endblock %}
