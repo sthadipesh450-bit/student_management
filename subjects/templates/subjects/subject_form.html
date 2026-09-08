@@ -1,8 +1,38 @@
-{% extends "base.html" %} {% block title %}Subject Form{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Subject Form{% endblock %} 
+{% block extra_head %}
+<style>
+  .form-intro {
+    margin-bottom: 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .form-intro h1 {
+    margin-bottom: 6px;
+  }
+  .helptext {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .errorlist {
+    margin: 6px 0;
+    padding: 0;
+    color: var(--danger);
+    list-style: none;
+    font-size: 0.9rem;
+  }
+</style>
+{% endblock %} {% block content %}
 <main class="container narrow">
   <a class="back" href="{% url 'subject_list' %}">← Back to subjects</a>
   <section class="card">
-    <h1>{% if object %}Edit Subject{% else %}Add Subject{% endif %}</h1>
+    <div class="form-intro">
+      <h1>{% if object %}Edit Subject{% else %}Add Subject{% endif %}</h1>
+      <p class="subtitle">
+        Keep the catalogue details accurate for students and instructors.
+      </p>
+    </div>
     <form method="post">
       {% csrf_token %}{{ form.as_p }}
       <div class="actions">

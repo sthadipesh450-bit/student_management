@@ -1,6 +1,23 @@
-{% extends "base.html" %} {% block title %}Delete Subject{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Delete Subject{% endblock %} 
+{% block extra_head %}
+<style>
+  .delete-mark {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--danger);
+    background: #fff0f2;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+</style>
+{% endblock %} {% block content %}
 <main class="container narrow">
   <section class="card">
+    <div class="delete-mark">!</div>
     <h1>Delete {{ subject.subject_name }}?</h1>
     <p class="subtitle">
       Courses will remain, but they will no longer be linked to this subject.

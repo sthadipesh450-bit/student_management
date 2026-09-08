@@ -1,8 +1,73 @@
-{% extends "base.html" %} {% block title %}{{ subject.subject_name }}{% endblock %} 
-{% block content %}
+{% extends "base.html" %} {% block title %}{{ subject.subject_name }}
+{% endblock %} {% block extra_head %}
+<style>
+  .subject-detail-head {
+    padding: 30px;
+    margin-bottom: 18px;
+    color: #fff;
+    background: linear-gradient(120deg, #172554, #3159d9);
+    border-radius: 18px;
+  }
+  .subject-detail-head .subtitle {
+    color: #dbeafe;
+  }
+  .subject-detail-head .button {
+    color: #172554;
+    background: #fff;
+  }
+  .subject-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .meta-pill {
+    padding: 7px 10px;
+    border: 1px solid #ffffff35;
+    border-radius: 999px;
+    color: #eef4ff;
+    font-size: 0.85rem;
+  }
+  .detail-section {
+    margin-top: 20px;
+  }
+  .detail-section h2 {
+    margin-bottom: 14px;
+    font-size: 1.25rem;
+  }
+  .course-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .course-list a {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .course-list a:hover {
+    border-color: #a9b9f1;
+    background: #f8faff;
+  }
+  .course-list span {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .description {
+    line-height: 1.7;
+  }
+</style>
+{% endblock %} {% block content %}
 <main class="container narrow">
   <a class="back" href="{% url 'subject_list' %}">← Back to subjects</a>
-  <section class="card">
+  <section class="subject-detail-head">
     <div class="page-header">
       <div>
         <h1>{{ subject.subject_name }}</h1>
@@ -12,6 +77,15 @@
         >Edit Subject</a
       >
     </div>
+    <div class="subject-meta">
+      <span class="meta-pill">{{ subject.subject_id }}</span>
+      <span class="meta-pill"
+        >{{ subject.credits }} credit{{ subject.credits|pluralize }}</span
+      >
+      <span class="meta-pill">{{ subject.department }}</span>
+    </div>
+  </section>
+  <section class="card">
     <dl class="details">
       <div>
         <dt>Subject ID</dt>
@@ -31,9 +105,26 @@
       </div>
       <div>
         <dt>Description</dt>
-        <dd>{{ subject.description|default:"No description provided." }}</dd>
+        <dd class="description">
+          {{ subject.description|default:"No description provided."|linebreaksbr
+          }}
+        </dd>
       </div>
     </dl>
+  </section>
+  <section class="card detail-section">
+    <h2>Linked courses</h2>
+    <ul class="course-list">
+      {% for course in subject.courses.all %}
+      <li>
+        <a href="{% url 'course_detail' course.pk %}"
+          ><strong>{{ course }}</strong><span>View course →</span></a
+        >
+      </li>
+      {% empty %}
+      <li class="empty">This subject is not linked to any courses yet.</li>
+      {% endfor %}
+    </ul>
   </section>
 </main>
 {% endblock %}

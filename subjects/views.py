@@ -26,6 +26,9 @@ class SubjectDetailView(DetailView):
     template_name = 'subjects/subject_detail.html'
     context_object_name = 'subject'
 
+    def get_queryset(self):
+        return Subject.objects.prefetch_related('courses')
+
 
 class SubjectCreateView(CreateView):
     model = Subject
