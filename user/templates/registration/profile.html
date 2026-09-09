@@ -1,5 +1,223 @@
-{% extends "base.html" %}
-{% block title %}My Profile{% endblock %}
-{% block content %}
-<main class="container narrow"><section class="card"><div class="page-header"><div><h1>My Profile</h1><p class="subtitle">Manage and review your Student Management account.</p></div></div><dl class="details"><div><dt>Username</dt><dd>{{ user.username }}</dd></div><div><dt>Full name</dt><dd>{{ user.get_full_name|default:"Not provided" }}</dd></div><div><dt>Email address</dt><dd>{{ user.email|default:"Not provided" }}</dd></div><div><dt>Member since</dt><dd>{{ user.date_joined|date:"F j, Y" }}</dd></div></dl><div class="actions"><a class="button" href="{% url 'dashboard' %}">Go to dashboard</a><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="secondary" type="submit">Sign out</button></form></div></section></main>
+{% extends "base.html" %} {% block title %}My Profile{% endblock %} 
+{% block extra_head %}
+<style>
+  .profile-shell {
+    display: grid;
+    gap: 24px;
+  }
+
+  .profile-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 26px 28px;
+    border: 1px solid #dfe7f5;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #1d4ed8 0%, #3159d9 28%, #173d99 100%);
+    color: #fff;
+    box-shadow: 0 18px 40px rgba(37, 99, 235, 0.22);
+  }
+
+  .profile-badge {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .profile-main {
+    flex: 1;
+  }
+
+  .eyebrow {
+    margin: 0 0 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .profile-hero h1 {
+    margin: 0;
+    color: #fff;
+  }
+
+  .profile-hero .subtitle {
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 22px;
+  }
+
+  .profile-card {
+    padding: 24px;
+    border: 1px solid #e4ebf8;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 32px rgba(27, 39, 76, 0.08);
+  }
+
+  .profile-card h2 {
+    margin-bottom: 18px;
+    color: #172033;
+  }
+
+  .profile-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .profile-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid #edf2fb;
+    border-radius: 12px;
+    background: #f9fbff;
+  }
+
+  .profile-row dt {
+    color: #68738a;
+    font-weight: 600;
+  }
+
+  .profile-row dd {
+    margin: 0;
+    color: #172033;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .quick-actions {
+    display: grid;
+    gap: 14px;
+  }
+
+  .mini-stat {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #f8faff, #eef4ff);
+    border: 1px solid #e4ebf8;
+  }
+
+  .mini-stat span {
+    display: block;
+    margin-bottom: 6px;
+    color: #68738a;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .mini-stat strong {
+    font-size: 1.05rem;
+    color: #172033;
+  }
+
+  @media (max-width: 700px) {
+    .profile-hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .profile-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .profile-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .profile-row dd {
+      text-align: left;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+<main class="container narrow">
+  <section class="profile-shell">
+    <div class="profile-hero">
+      <div class="profile-badge">{{ user.username|slice:":1"|upper }}</div>
+      <div class="profile-main">
+        <p class="eyebrow">Account overview</p>
+        <h1>{{ user.get_full_name|default:user.username }}</h1>
+        <p class="subtitle">{{ user.email|default:"No email on file" }}</p>
+      </div>
+      <div class="status-pill">Active account</div>
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h2>Profile details</h2>
+        <dl class="profile-list">
+          <div class="profile-row">
+            <dt>Username</dt>
+            <dd>{{ user.username }}</dd>
+          </div>
+          <div class="profile-row">
+            <dt>Full name</dt>
+            <dd>{{ user.get_full_name|default:"Not provided" }}</dd>
+          </div>
+          <div class="profile-row">
+            <dt>Email address</dt>
+            <dd>{{ user.email|default:"Not provided" }}</dd>
+          </div>
+          <div class="profile-row">
+            <dt>Member since</dt>
+            <dd>{{ user.date_joined|date:"F j, Y" }}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="profile-card">
+        <h2>Quick actions</h2>
+        <div class="quick-actions">
+          <div class="mini-stat">
+            <span>Role</span>
+            <strong>{{ user.is_staff|yesno:"Administrator,Member" }}</strong>
+          </div>
+          <div class="mini-stat">
+            <span>Access</span>
+            <strong>Student management</strong>
+          </div>
+          <div class="actions">
+            <a class="button" href="{% url 'dashboard' %}">Go to dashboard</a>
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}<button class="secondary" type="submit">
+                Sign out
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 {% endblock %}
