@@ -1,1 +1,127 @@
-{% extends "base.html" %}{% block title %}Attendance Form{% endblock %}{% block content %}<main class="container narrow"><a class="back" href="{% url 'attendance_list' %}">← Back to attendance</a><section class="card"><h1>{% if object %}Update Attendance{% else %}Add Attendance{% endif %}</h1><form method="post">{% csrf_token %}{{ form.as_p }}<div class="form-actions"><a class="button secondary" href="{% url 'attendance_list' %}">Cancel</a><button type="submit">Save Attendance</button></div></form></section></main>{% endblock %}
+{% extends "base.html" %} {% block title %}Attendance Form{% endblock %} 
+{% block extra_head %}
+<style>
+  .attendance-form-page {
+    width: min(760px, calc(100% - 32px));
+    margin: 36px auto 64px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: #1d4ed8;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .form-card {
+    padding: 28px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+  }
+
+  .form-header {
+    margin-bottom: 22px;
+  }
+
+  .form-header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .form-header p {
+    margin: 10px 0 0;
+    color: var(--muted);
+  }
+
+  .modern-form {
+    display: grid;
+    gap: 18px;
+  }
+
+  .modern-form p {
+    margin: 0;
+  }
+
+  .modern-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .modern-form input,
+  .modern-form select,
+  .modern-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cfd8ea;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: var(--ink);
+    font: inherit;
+  }
+
+  .modern-form input:focus,
+  .modern-form select:focus,
+  .modern-form textarea:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.12);
+    background: #fff;
+  }
+
+  .modern-form textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .button.secondary {
+    background: #edf2ff;
+    color: #172554;
+  }
+
+  @media (max-width: 600px) {
+    .form-card {
+      padding: 22px 18px;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+<main class="attendance-form-page">
+  <a class="back-link" href="{% url 'attendance_list' %}"
+    >← Back to attendance</a
+  >
+
+  <section class="form-card">
+    <div class="form-header">
+      <h1>
+        {% if object %}Update Attendance{% else %}Add Attendance{% endif %}
+      </h1>
+      <p>Fill in the student attendance record below.</p>
+    </div>
+
+    <form class="modern-form" method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <div class="form-actions">
+        <a class="button secondary" href="{% url 'attendance_list' %}"
+          >Cancel</a
+        >
+        <button type="submit">Save Attendance</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}
