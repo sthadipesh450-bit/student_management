@@ -5,42 +5,80 @@
     width: min(1180px, calc(100% - 48px));
     margin: 36px auto 64px;
   }
+
   .dashboard-hero {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: space-between;
     gap: 28px;
     padding: 34px 38px;
     color: #fff;
-    background: linear-gradient(120deg, #172554, #24477d 58%, #087f82);
-    border-radius: 18px;
-    box-shadow: 0 18px 34px #1725542b;
+    background: linear-gradient(120deg, #0f172a 0%, #1d4ed8 28%, #0f766e 100%);
+    border-radius: 22px;
+    box-shadow: 0 22px 40px rgba(15, 23, 42, 0.18);
   }
+
   .dashboard-hero h1 {
-    margin-bottom: 8px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(2.1rem, 5vw, 3.35rem);
-    font-weight: 500;
-  }
-  .eyebrow {
     margin: 0 0 10px;
-    color: #9ee7df;
+    font-size: clamp(2.1rem, 4vw, 3.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  .eyebrow {
+    margin: 0 0 12px;
+    color: #bfdbfe;
     font-size: 0.76rem;
     font-weight: 800;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
+
   .hero-copy {
     max-width: 560px;
     margin: 0;
-    color: #d9ecf1;
+    color: #dbeafe;
     line-height: 1.6;
   }
-  .hero-action {
-    flex: 0 0 auto;
-    color: #172554;
-    background: #fff;
+
+  .hero-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
   }
+
+  .hero-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 160px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    text-align: right;
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-badge span {
+    color: #dbeafe;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-badge strong {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  .hero-action {
+    color: #0f172a;
+    background: #fff;
+    box-shadow: 0 12px 20px rgba(15, 23, 42, 0.15);
+  }
+
   .section-heading {
     display: flex;
     align-items: baseline;
@@ -48,207 +86,271 @@
     gap: 16px;
     margin: 34px 0 14px;
   }
+
   .section-heading h2,
   .dashboard-panel h2 {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.08rem;
   }
+
   .section-heading p {
     margin: 0;
     color: var(--muted);
     font-size: 0.86rem;
   }
+
   .metric-grid {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 12px;
+    gap: 14px;
   }
+
   .metric {
     position: relative;
-    min-height: 132px;
-    padding: 20px;
+    min-height: 142px;
+    padding: 22px 20px;
     overflow: hidden;
     background: #fff;
     border: 1px solid var(--line);
-    border-radius: 12px;
-    box-shadow: 0 8px 20px #283b6e0d;
+    border-radius: 16px;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
   }
+
   .metric::after {
     position: absolute;
     right: -18px;
-    bottom: -24px;
-    width: 74px;
-    height: 74px;
+    bottom: -22px;
+    width: 86px;
+    height: 86px;
     border-radius: 50%;
-    background: var(--metric-tint, #dff6f0);
+    background: var(--metric-tint, #dbeafe);
     content: "";
   }
+
   .metric-label {
+    position: relative;
+    z-index: 1;
     display: block;
     color: var(--muted);
-    font-size: 0.78rem;
-    font-weight: 750;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+
   .metric-value {
+    position: relative;
+    z-index: 1;
     display: block;
-    margin-top: 18px;
+    margin-top: 22px;
     color: var(--metric-color, var(--ink));
-    font-size: 2rem;
+    font-size: clamp(1.9rem, 2vw, 2.4rem);
     line-height: 1;
   }
+
   .metric-students {
     --metric-color: #1d4ed8;
     --metric-tint: #dbeafe;
   }
+
   .metric-courses {
-    --metric-color: #087f82;
-    --metric-tint: #d9f7f1;
+    --metric-color: #0f766e;
+    --metric-tint: #dff7f4;
   }
+
   .metric-subjects {
-    --metric-color: #93621b;
-    --metric-tint: #fff0c8;
+    --metric-color: #a16207;
+    --metric-tint: #fff3cd;
   }
+
   .metric-teachers {
     --metric-color: #7c3aed;
     --metric-tint: #ede9fe;
   }
+
   .metric-attendance {
-    --metric-color: #c2415a;
-    --metric-tint: #ffe1e6;
+    --metric-color: #c5305f;
+    --metric-tint: #ffe4e8;
   }
+
   .action-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 9px;
+    gap: 10px;
     padding: 14px;
-    background: #eaf4f5;
-    border: 1px solid #d4e7e8;
-    border-radius: 12px;
+    background: linear-gradient(180deg, #f3f8ff, #ecfeff);
+    border: 1px solid #d3ebf3;
+    border-radius: 14px;
   }
+
   .action-bar .button {
-    min-height: 38px;
-    padding: 8px 13px;
-    color: #155e63;
+    min-height: 40px;
+    padding: 8px 14px;
+    color: #164e63;
     background: #fff;
-    border: 1px solid #c9e0e1;
-    font-size: 0.88rem;
+    border: 1px solid #cae7ee;
+    font-size: 0.86rem;
   }
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-    gap: 18px;
-    margin-top: 18px;
-  }
+
   .dashboard-panel {
     min-width: 0;
     padding: 24px;
     background: #fff;
     border: 1px solid var(--line);
-    border-radius: 14px;
-    box-shadow: 0 8px 20px #283b6e0d;
+    border-radius: 16px;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.04);
   }
-  .panel-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 18px;
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 18px;
+    margin-top: 18px;
   }
-  .panel-heading a {
-    color: var(--primary);
-    font-size: 0.82rem;
-    font-weight: 750;
-    text-decoration: none;
-  }
+
   .summary-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
+    gap: 12px;
+    margin-top: 16px;
   }
+
   .summary-item {
-    padding: 15px;
-    background: #f7fafc;
-    border-left: 3px solid #9ee7df;
-    border-radius: 6px;
+    padding: 18px 16px;
+    background: #f8fafc;
+    border-left: 4px solid #7dd3fc;
+    border-radius: 10px;
   }
+
+  .summary-item:nth-child(2) {
+    border-color: #fbbf24;
+  }
+
+  .summary-item:nth-child(3) {
+    border-color: #f87171;
+  }
+
+  .summary-item:nth-child(4) {
+    border-color: #60a5fa;
+  }
+
   .summary-item dt {
     color: var(--muted);
-    font-size: 0.76rem;
-    font-weight: 750;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+
   .summary-item dd {
-    margin: 7px 0 0;
-    font-size: 1.45rem;
+    margin: 8px 0 0;
+    font-size: 1.6rem;
     font-weight: 800;
+    color: var(--ink);
   }
-  .summary-item:nth-child(2) {
-    border-color: #f2b84b;
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 12px;
   }
-  .summary-item:nth-child(3) {
-    border-color: #f0798c;
+
+  .dashboard-panel table {
+    width: 100%;
+    border-collapse: collapse;
   }
-  .summary-item:nth-child(4) {
-    border-color: #6c8ce8;
+
+  .dashboard-panel thead th {
+    padding: 12px 10px;
+    background: #f8fafc;
+    color: var(--muted);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-align: left;
+    text-transform: uppercase;
   }
-  .dashboard-panel th {
-    padding: 10px 12px;
-    background: #f7fafc;
+
+  .dashboard-panel tbody td {
+    padding: 12px 10px;
+    border-top: 1px solid var(--line);
   }
-  .dashboard-panel td {
-    padding: 12px;
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
-  .status-value {
-    font-weight: 750;
+
+  .status-present {
+    background: #dcfce7;
+    color: #166534;
   }
-  .status-value[data-status="Absent"],
-  .status-value[data-grade="F"] {
-    color: var(--danger);
+
+  .status-absent {
+    background: #fee2e2;
+    color: #991b1b;
   }
-  .status-value[data-status="Present"],
-  .status-value[data-grade="A+"],
-  .status-value[data-grade="A"] {
-    color: #087f82;
+
+  .status-late {
+    background: #fef3c7;
+    color: #92400e;
   }
+
+  .empty {
+    margin: 18px 0 0;
+    color: var(--muted);
+    text-align: center;
+  }
+
   @media (max-width: 900px) {
     .metric-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+
     .dashboard-grid {
       grid-template-columns: 1fr;
     }
   }
+
   @media (max-width: 600px) {
     .dashboard-page {
       width: calc(100% - 32px);
       margin-top: 24px;
     }
+
     .dashboard-hero {
-      align-items: flex-start;
       flex-direction: column;
-      padding: 26px;
+      align-items: flex-start;
+      padding: 26px 22px;
     }
+
+    .hero-side {
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .hero-badge {
+      text-align: left;
+    }
+
     .metric-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .metric {
-      min-height: 112px;
-      padding: 16px;
-    }
-    .metric-value {
-      margin-top: 14px;
-      font-size: 1.7rem;
-    }
+
     .summary-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .dashboard-panel {
-      padding: 18px;
-    }
+
     .section-heading {
       align-items: flex-start;
       flex-direction: column;
+    }
+
+    .dashboard-panel {
+      padding: 18px;
     }
   }
 </style>
@@ -257,54 +359,65 @@
   <header class="dashboard-hero">
     <div>
       <p class="eyebrow">Academic overview</p>
-      <h1>Good morning, ClassFlow.</h1>
+      <h1>Welcome back, ClassFlow.</h1>
       <p class="hero-copy">
-        A clear view of your students, attendance, and academic progress.
+        A clear view of your students, attendance, and academic progress in one
+        place.
       </p>
     </div>
-    <a class="button hero-action" href="{% url 'student_add' %}"
-      >Add a student</a
-    >
+
+    <div class="hero-side">
+      <div class="hero-badge">
+        <span>Attendance rate</span>
+        <strong>{{ attendance_rate }}%</strong>
+      </div>
+      <a class="button hero-action" href="{% url 'student_add' %}"
+        >Add a student</a
+      >
+    </div>
   </header>
+
   <div class="section-heading">
     <h2>At a glance</h2>
     <p>Live totals from your school records</p>
   </div>
+
   <section class="metric-grid" aria-label="School totals">
     <div class="metric metric-students">
-      <span class="metric-label">Students</span
-      ><strong class="metric-value">{{ total_students }}</strong>
+      <span class="metric-label">Students</span>
+      <strong class="metric-value">{{ total_students }}</strong>
     </div>
     <div class="metric metric-courses">
-      <span class="metric-label">Courses</span
-      ><strong class="metric-value">{{ total_courses }}</strong>
+      <span class="metric-label">Courses</span>
+      <strong class="metric-value">{{ total_courses }}</strong>
     </div>
     <div class="metric metric-subjects">
-      <span class="metric-label">Subjects</span
-      ><strong class="metric-value">{{ total_subjects }}</strong>
+      <span class="metric-label">Subjects</span>
+      <strong class="metric-value">{{ total_subjects }}</strong>
     </div>
     <div class="metric metric-teachers">
-      <span class="metric-label">Teachers</span
-      ><strong class="metric-value">{{ total_teachers }}</strong>
+      <span class="metric-label">Teachers</span>
+      <strong class="metric-value">{{ total_teachers }}</strong>
     </div>
     <div class="metric metric-attendance">
-      <span class="metric-label">Attendance records</span
-      ><strong class="metric-value">{{ total_attendance }}</strong>
+      <span class="metric-label">Attendance records</span>
+      <strong class="metric-value">{{ total_attendance }}</strong>
     </div>
   </section>
+
   <div class="section-heading">
     <h2>Quick actions</h2>
     <p>Jump straight into your daily work</p>
   </div>
+
   <nav class="action-bar" aria-label="Quick actions">
-    <div class="actions">
-      <a class="button" href="{% url 'student_add' %}">Add Student</a
-      ><a class="button" href="{% url 'teacher_add' %}">Add Teacher</a
-      ><a class="button" href="{% url 'subject_add' %}">Add Subject</a
-      ><a class="button" href="{% url 'course_add' %}">Add Course</a
-      ><a class="button" href="{% url 'attendance_add' %}">Add Attendance</a>
-    </div>
+    <a class="button" href="{% url 'student_add' %}">Add Student</a>
+    <a class="button" href="{% url 'teacher_add' %}">Add Teacher</a>
+    <a class="button" href="{% url 'subject_add' %}">Add Subject</a>
+    <a class="button" href="{% url 'course_add' %}">Add Course</a>
+    <a class="button" href="{% url 'attendance_add' %}">Add Attendance</a>
   </nav>
+
   <section class="dashboard-panel" style="margin-top: 18px">
     <h2>Attendance Summary</h2>
     <div class="summary-grid">
@@ -326,22 +439,29 @@
       </div>
     </div>
   </section>
+
   <section class="dashboard-panel" style="margin-top: 18px">
     <h2>Academic Results</h2>
     <div class="summary-grid">
-    <div class="summary-item">
-      <dt>Total Results</dt>
-      <dd>{{ total_results }}</dd>
-    </div>
-    <div class="summary-item">
-      <dt>Average GPA</dt>
-      <dd>{{ average_gpa|default:"0"|floatformat:2 }}</dd>
-    </div>
-    <div class="summary-item">
-      <dt>Failed Results</dt>
-      <dd>{{ failed_results }}</dd>
+      <div class="summary-item">
+        <dt>Total Results</dt>
+        <dd>{{ total_results }}</dd>
+      </div>
+      <div class="summary-item">
+        <dt>Average GPA</dt>
+        <dd>{{ average_gpa|default:"0"|floatformat:2 }}</dd>
+      </div>
+      <div class="summary-item">
+        <dt>Failed Results</dt>
+        <dd>{{ failed_results }}</dd>
+      </div>
+      <div class="summary-item">
+        <dt>Today</dt>
+        <dd>{{ today_present }}</dd>
+      </div>
     </div>
   </section>
+
   <section class="dashboard-panel" style="margin-top: 18px">
     <h2>Today's Attendance</h2>
     <div class="summary-grid">
@@ -357,8 +477,13 @@
         <dt>Late</dt>
         <dd>{{ today_late }}</dd>
       </div>
+      <div class="summary-item">
+        <dt>Records</dt>
+        <dd>{{ today_present|add:today_absent|add:today_late }}</dd>
+      </div>
     </div>
   </section>
+
   <section class="dashboard-grid">
     <div class="dashboard-panel">
       <h2>Recent Attendance</h2>
@@ -377,7 +502,15 @@
             <tr>
               <td>{{ record.student.name }}</td>
               <td>{{ record.date }}</td>
-              <td>{{ record.status }}</td>
+              <td>
+                {% if record.status == 'Present' %}
+                <span class="status-pill status-present">Present</span>
+                {% elif record.status == 'Absent' %}
+                <span class="status-pill status-absent">Absent</span>
+                {% else %}
+                <span class="status-pill status-late">Late</span>
+                {% endif %}
+              </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -387,6 +520,7 @@
       <p class="empty">No attendance records yet.</p>
       {% endif %}
     </div>
+
     <div class="dashboard-panel">
       <h2>Students</h2>
       {% if recent_students %}
@@ -413,6 +547,7 @@
       {% endif %}
     </div>
   </section>
+
   <section class="dashboard-panel" style="margin-top: 18px">
     <h2>Recent Results</h2>
     {% if recent_results %}
