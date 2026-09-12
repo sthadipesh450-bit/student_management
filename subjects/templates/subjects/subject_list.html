@@ -1,44 +1,118 @@
-{% extends "base.html" %} {% block title %}Subjects{% endblock %} 
-{% block extra_head %}
+{% extends "base.html" %} {% block title %}Subjects{% endblock %} {% block
+extra_head %}
 <style>
   .subject-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
     padding: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     color: #fff;
-    background: linear-gradient(120deg, #172554, #3159d9);
-    border-radius: 18px;
-    box-shadow: 0 18px 36px #17255426;
+    background: linear-gradient(120deg, #172554, #3159d9 60%, #5a7cff);
+    border-radius: 20px;
+    box-shadow: 0 20px 42px rgba(49, 89, 217, 0.25);
+  }
+  .eyebrow {
+    margin: 0 0 8px;
+    color: #dbeafe;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
   }
   .subject-hero h1 {
-    margin-bottom: 6px;
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 2.8rem);
   }
   .subject-hero .subtitle {
+    margin: 8px 0 0;
     color: #dbeafe;
   }
-  .subject-hero .button {
+  .hero-button {
     color: #172554;
     background: #fff;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
   }
-  .subject-toolbar {
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 24px rgba(24, 39, 75, 0.06);
+  }
+  .stat-card .label {
+    color: var(--muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .stat-card strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+  .subject-panel {
+    padding: 0;
+    overflow: hidden;
+  }
+  .section-heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 18px;
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--line);
   }
-  .subject-count {
+  .section-heading h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  .record-count {
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: var(--primary);
+    background: #edf2ff;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
+  .subject-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .subject-table th {
+    padding: 14px 18px;
+    background: #f8faff;
     color: var(--muted);
-    font-size: 0.92rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+  }
+  .subject-table td {
+    padding: 16px 18px;
+    border-top: 1px solid var(--line);
+    vertical-align: middle;
   }
   .code-chip {
     display: inline-block;
-    padding: 6px 9px;
-    border-radius: 6px;
-    color: #2344b8;
-    background: #e8edff;
-    font-size: 0.82rem;
+    padding: 7px 10px;
+    border-radius: 8px;
+    color: #2247c8;
+    background: #e9eeff;
+    font-size: 0.8rem;
     font-weight: 800;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
   }
   .subject-name {
     color: var(--ink);
@@ -47,18 +121,40 @@
   .subject-name:hover {
     color: var(--primary);
   }
+  .subject-meta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #eef4ff;
+    color: var(--primary);
+    font-weight: 700;
+  }
   .row-actions {
     white-space: nowrap;
     font-size: 0.9rem;
+  }
+  .row-actions a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
   }
   .row-actions a:last-child {
     color: var(--danger);
   }
   @media (max-width: 700px) {
     .subject-hero {
+      align-items: flex-start;
+      flex-direction: column;
       padding: 24px;
     }
-    .subject-toolbar {
+    .stats-strip {
+      grid-template-columns: 1fr;
+    }
+    .section-heading {
       align-items: flex-start;
       flex-direction: column;
     }
@@ -68,55 +164,88 @@
 <main class="container">
   <section class="subject-hero">
     <div>
+      <p class="eyebrow">Academic catalogue</p>
       <h1>Subjects</h1>
-      <p class="subtitle">Manage subjects and link them to courses.</p>
+      <p class="subtitle">
+        Manage subjects and keep every course linked cleanly.
+      </p>
     </div>
-    <a class="button" href="{% url 'subject_add' %}">+ Add Subject</a>
-  </section>
-  <div class="subject-toolbar">
-    <strong>Subject catalogue</strong>
-    <span class="subject-count"
-      >{{ subjects|length }} subject{{ subjects|length|pluralize }}</span
+    <a class="button hero-button" href="{% url 'subject_add' %}"
+      ><span aria-hidden="true">+</span> Add subject</a
     >
-  </div>
-  <section class="content-card table-wrap">
-    <table class="subject-table">
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Subject</th>
-          <th>Credits</th>
-          <th>Semester</th>
-          <th>Department</th>
-          <th>Courses</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for subject in subjects %}
-        <tr>
-          <td><span class="code-chip">{{ subject.subject_code }}</span></td>
-          <td>
-            <a class="subject-name" href="{% url 'subject_detail' subject.pk %}"
-              >{{ subject.subject_name }}</a
-            >
-          </td>
-          <td>{{ subject.credits }}</td>
-          <td>{{ subject.semester }}</td>
-          <td>{{ subject.department }}</td>
-          <td>{{ subject.course_count }}</td>
-          <td class="row-actions">
-            <a href="{% url 'subject_edit' subject.pk %}">Edit</a> ·
-            <a href="{% url 'subject_delete' subject.pk %}">Delete</a>
-          </td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td class="empty" colspan="7">No subjects yet.</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  </section>
+
+  <section class="stats-strip" aria-label="Subject summary">
+    <div class="stat-card">
+      <span class="label">Total subjects</span>
+      <strong>{{ subjects|length }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="label">Courses linked</span>
+      <strong>{{ subjects|default:''|length }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="label">Catalog status</span>
+      <strong>Active</strong>
+    </div>
+  </section>
+
+  <section class="content-card subject-panel">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Course mapping</p>
+        <h2>Subject catalogue</h2>
+      </div>
+      <span class="record-count"
+        >{{ subjects|length }} record{{ subjects|length|pluralize }}</span
+      >
+    </div>
+
+    <div class="table-wrap">
+      <table class="subject-table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Subject</th>
+            <th>Credits</th>
+            <th>Semester</th>
+            <th>Department</th>
+            <th>Courses</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for subject in subjects %}
+          <tr>
+            <td><span class="code-chip">{{ subject.subject_code }}</span></td>
+            <td>
+              <a
+                class="subject-name"
+                href="{% url 'subject_detail' subject.pk %}"
+                >{{ subject.subject_name }}</a
+              >
+            </td>
+            <td>{{ subject.credits }}</td>
+            <td>{{ subject.semester }}</td>
+            <td>{{ subject.department }}</td>
+            <td>
+              <span class="subject-meta">{{ subject.course_count }}</span>
+            </td>
+            <td class="row-actions">
+              <a href="{% url 'subject_edit' subject.pk %}">Edit</a> ·
+              <a href="{% url 'subject_delete' subject.pk %}">Delete</a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="empty" colspan="7">
+              No subjects yet. Add your first subject to begin the catalogue.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </section>
 </main>
 {% endblock %}
