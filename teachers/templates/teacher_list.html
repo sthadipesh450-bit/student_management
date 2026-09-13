@@ -52,8 +52,10 @@
         <tbody>
           {% for teacher in teachers %}
           <tr>
-            <td><span class="teacher-id">{{ teacher.teacher_id }}</span></td>
-            <td>
+            <td data-label="Teacher ID">
+              <span class="teacher-id">{{ teacher.teacher_id }}</span>
+            </td>
+            <td data-label="Name">
               <a
                 class="teacher-name"
                 href="{% url 'teacher_detail' teacher.pk %}"
@@ -65,10 +67,12 @@
                 ></a
               >
             </td>
-            <td class="muted-cell">{{ teacher.email }}</td>
-            <td class="muted-cell">{{ teacher.phone }}</td>
-            <td><span class="subject-tag">{{ teacher.subject }}</span></td>
-            <td class="row-actions">
+            <td data-label="Email" class="muted-cell">{{ teacher.email }}</td>
+            <td data-label="Phone" class="muted-cell">{{ teacher.phone }}</td>
+            <td data-label="Subject">
+              <span class="subject-tag">{{ teacher.subject }}</span>
+            </td>
+            <td data-label="Actions" class="row-actions">
               <a href="{% url 'teacher_edit' teacher.pk %}">Edit</a
               ><a
                 class="delete-link"

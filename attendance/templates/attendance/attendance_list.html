@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}Attendance{% endblock %} 
-{% block extra_head %}
+{% extends "base.html" %} {% block title %}Attendance{% endblock %} {% block
+extra_head %}
 <style>
   .attendance-page {
     width: min(1180px, calc(100% - 48px));
@@ -180,6 +180,58 @@
     .table-panel {
       padding: 18px;
     }
+
+    table,
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      display: block;
+      width: 100%;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 10px 0;
+    }
+
+    tr {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      border: 0;
+    }
+
+    td::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .table-actions {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
   }
 </style>
 {% endblock %} {% block content %}
@@ -227,9 +279,9 @@
         <tbody>
           {% for record in attendance %}
           <tr>
-            <td>{{ record.student.name }}</td>
-            <td>{{ record.date }}</td>
-            <td>
+            <td data-label="Student">{{ record.student.name }}</td>
+            <td data-label="Date">{{ record.date }}</td>
+            <td data-label="Status">
               {% if record.status == 'Present' %}
               <span class="status-pill status-present">Present</span>
               {% elif record.status == 'Absent' %}
@@ -238,8 +290,8 @@
               <span class="status-pill status-late">Late</span>
               {% endif %}
             </td>
-            <td>{{ record.remarks|default:'—' }}</td>
-            <td>
+            <td data-label="Remarks">{{ record.remarks|default:'—' }}</td>
+            <td data-label="Actions">
               <div class="table-actions">
                 <a href="{% url 'attendance_edit' record.pk %}">Edit</a>
                 <a

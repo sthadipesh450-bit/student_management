@@ -126,6 +126,51 @@
     .students-table {
       padding: 6px;
     }
+    .students-table table,
+    .students-table thead,
+    .students-table tbody,
+    .students-table tr,
+    .students-table th,
+    .students-table td {
+      display: block;
+      width: 100%;
+    }
+    .students-table thead {
+      display: none;
+    }
+    .students-table tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 12px 8px;
+    }
+    .students-table tr {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 22px rgba(24, 39, 75, 0.04);
+    }
+    .students-table td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      border: 0;
+    }
+    .students-table td::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .student-actions {
+      justify-content: flex-start;
+      white-space: normal;
+    }
   }
 </style>
 {% endblock %} {% block content %}
@@ -166,14 +211,14 @@
       <tbody>
         {% for student in students %}
         <tr>
-          <td>{{ student.student_id }}</td>
-          <td class="student-name">{{ student.name }}</td>
-          <td>{{ student.age }}</td>
-          <td>{{ student.email }}</td>
-          <td>{{ student.phone }}</td>
-          <td>{{ student.course }}</td>
-          <td>{{ student.address }}</td>
-          <td class="student-actions">
+          <td data-label="ID">{{ student.student_id }}</td>
+          <td data-label="Name" class="student-name">{{ student.name }}</td>
+          <td data-label="Age">{{ student.age }}</td>
+          <td data-label="Email">{{ student.email }}</td>
+          <td data-label="Phone">{{ student.phone }}</td>
+          <td data-label="Course">{{ student.course }}</td>
+          <td data-label="Address">{{ student.address }}</td>
+          <td data-label="Actions" class="student-actions">
             <a href="{% url 'student_edit' student.pk %}">Edit</a> ·
             <a href="{% url 'student_delete' student.pk %}">Delete</a>
           </td>

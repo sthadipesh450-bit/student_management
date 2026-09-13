@@ -48,23 +48,29 @@
         <tbody>
           {% for course in courses %}
           <tr>
-            <td><span class="course-code">{{ course.course_code }}</span></td>
-            <td>
+            <td data-label="Code">
+              <span class="course-code">{{ course.course_code }}</span>
+            </td>
+            <td data-label="Course">
               <a class="course-name" href="{% url 'course_detail' course.pk %}"
                 >{{ course.course_name }}</a
               >
             </td>
-            <td>
+            <td data-label="Subject">
               <span class="subject-tag"
                 >{{ course.subject|default:"Not assigned" }}</span
               >
             </td>
-            <td class="muted-cell">
+            <td data-label="Teacher" class="muted-cell">
               {{ course.teacher|default:"Not assigned" }}
             </td>
-            <td><span class="credit-value">{{ course.credits }} cr</span></td>
-            <td class="muted-cell">{{ course.duration }}</td>
-            <td class="row-actions">
+            <td data-label="Credits">
+              <span class="credit-value">{{ course.credits }} cr</span>
+            </td>
+            <td data-label="Duration" class="muted-cell">
+              {{ course.duration }}
+            </td>
+            <td data-label="Actions" class="row-actions">
               <a href="{% url 'course_edit' course.pk %}">Edit</a
               ><a class="delete-link" href="{% url 'course_delete' course.pk %}"
                 >Delete</a

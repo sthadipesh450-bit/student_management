@@ -145,7 +145,7 @@
   .row-actions a:last-child {
     color: var(--danger);
   }
-  @media (max-width: 700px) {
+  @media (max-width: 760px) {
     .subject-hero {
       align-items: flex-start;
       flex-direction: column;
@@ -157,6 +157,54 @@
     .section-heading {
       align-items: flex-start;
       flex-direction: column;
+    }
+    .subject-table,
+    .subject-table thead,
+    .subject-table tbody,
+    .subject-table tr,
+    .subject-table th,
+    .subject-table td {
+      display: block;
+      width: 100%;
+    }
+    .subject-table thead {
+      display: none;
+    }
+    .subject-table tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 18px 14px 10px;
+    }
+    .subject-table tr {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 22px rgba(24, 39, 75, 0.05);
+    }
+    .subject-table td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      border: 0;
+    }
+    .subject-table td::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .subject-table td:last-child {
+      padding-bottom: 0;
+    }
+    .row-actions {
+      justify-content: flex-start;
+      white-space: normal;
     }
   }
 </style>
@@ -217,21 +265,23 @@
         <tbody>
           {% for subject in subjects %}
           <tr>
-            <td><span class="code-chip">{{ subject.subject_code }}</span></td>
-            <td>
+            <td data-label="Code">
+              <span class="code-chip">{{ subject.subject_code }}</span>
+            </td>
+            <td data-label="Subject">
               <a
                 class="subject-name"
                 href="{% url 'subject_detail' subject.pk %}"
                 >{{ subject.subject_name }}</a
               >
             </td>
-            <td>{{ subject.credits }}</td>
-            <td>{{ subject.semester }}</td>
-            <td>{{ subject.department }}</td>
-            <td>
+            <td data-label="Credits">{{ subject.credits }}</td>
+            <td data-label="Semester">{{ subject.semester }}</td>
+            <td data-label="Department">{{ subject.department }}</td>
+            <td data-label="Courses">
               <span class="subject-meta">{{ subject.course_count }}</span>
             </td>
-            <td class="row-actions">
+            <td data-label="Actions" class="row-actions">
               <a href="{% url 'subject_edit' subject.pk %}">Edit</a> ·
               <a href="{% url 'subject_delete' subject.pk %}">Delete</a>
             </td>

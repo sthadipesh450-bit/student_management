@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}Results{% endblock %} 
-{% block extra_head %}
+{% extends "base.html" %} {% block title %}Results{% endblock %} {% block
+extra_head %}
 <style>
   .results-hero {
     display: flex;
@@ -155,6 +155,51 @@
       align-items: flex-start;
       flex-direction: column;
     }
+    table,
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      display: block;
+      width: 100%;
+    }
+    thead {
+      display: none;
+    }
+    tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 18px 14px 10px;
+    }
+    tr {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 22px rgba(24, 39, 75, 0.05);
+    }
+    td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      border: 0;
+    }
+    td::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .row-actions {
+      justify-content: flex-start;
+      white-space: normal;
+    }
   }
 </style>
 {% endblock %} {% block content %}
@@ -216,14 +261,22 @@
         <tbody>
           {% for result in results %}
           <tr>
-            <td><span class="result-pill">{{ result.result_id }}</span></td>
-            <td><span class="student-name">{{ result.student }}</span></td>
-            <td>{{ result.subject }}</td>
-            <td>{{ result.exam_type }}</td>
-            <td>{{ result.marks }} / {{ result.full_marks }}</td>
-            <td><span class="result-grade">{{ result.grade }}</span></td>
-            <td>{{ result.gpa }}</td>
-            <td class="row-actions">
+            <td data-label="Result ID">
+              <span class="result-pill">{{ result.result_id }}</span>
+            </td>
+            <td data-label="Student">
+              <span class="student-name">{{ result.student }}</span>
+            </td>
+            <td data-label="Subject">{{ result.subject }}</td>
+            <td data-label="Exam">{{ result.exam_type }}</td>
+            <td data-label="Marks">
+              {{ result.marks }} / {{ result.full_marks }}
+            </td>
+            <td data-label="Grade">
+              <span class="result-grade">{{ result.grade }}</span>
+            </td>
+            <td data-label="GPA">{{ result.gpa }}</td>
+            <td data-label="Actions" class="row-actions">
               <a href="{% url 'result_detail' result.pk %}">View</a> ·
               <a href="{% url 'result_edit' result.pk %}">Edit</a> ·
               <a href="{% url 'result_delete' result.pk %}">Delete</a>
